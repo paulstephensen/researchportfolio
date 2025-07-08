@@ -11,7 +11,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Missing OpenAI API key' }, { status: 500 });
   }
 
+  if (!message || typeof message !== 'string') {
+    return NextResponse.json({ error: 'Invalid message format' }, { status: 400 });
+  }
+
   try {
+    console.log("Calling OpenAI with message:", message);
+
     const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -31,6 +37,7 @@ export async function POST(req: NextRequest) {
     const data = await openaiRes.json();
     return NextResponse.json(data);
   } catch (err) {
+    console.error("OpenAI request failed:", err);
     return NextResponse.json({ error: 'OpenAI request failed', details: err }, { status: 500 });
   }
 }
