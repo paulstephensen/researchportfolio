@@ -1,0 +1,13 @@
+node_modules
+.next
+.git
+.gitignore
+Dockerfile
+README.md
+README_footer.md
+LICENSE
+.env
+.env.local
+.env.example
+*.log
+*.tsbuildinfo
